@@ -13,11 +13,12 @@ class Solution:
         # Sigmoid: σ(z) = 1 / (1 + exp(-z))
         # ReLU: max(0, z)
         # return round(your_answer, 5)
-        def ReLU (z: NDArray[np.float64]):
-            return np.maximum(0, z)
+        z = np.dot(x, w) +b
 
-        def Sigmoid (z: NDArray[np.float64]):
-            return 1 / (1 + np.exp(-z))
-
-        activationMap = {'sigmoid': Sigmoid, 'relu': ReLU}
-        return np.round(activationMap[activation](x @ w +b), 5) 
+        match activation:
+            case 'relu':
+                return np.round(np.maximum(0, z), 5)
+            case 'sigmoid':
+                return np.round(1 / (1 + np.exp(-z)), 5)
+            case _:
+                return np.round(z, 5)
