@@ -15,8 +15,6 @@ class Solution:
         # Return: (dL_dw rounded to 5 decimals, dL_db rounded to 5 decimals)
         z = np.dot(w, x) + b
         y_pred = 1 / (1 + np.exp(-z))
-        dL_dw = np.zeros(len(w))
         dL_db = np.dot(y_pred - y_true, np.dot(y_pred, (1 - y_pred)))
-        for i in range(len(w)):
-            dL_dw[i] = np.dot(dL_db, x[i])
+        dL_dw = np.dot(dL_db, x)
         return (np.round(dL_dw, 5), round(dL_db, 5))
